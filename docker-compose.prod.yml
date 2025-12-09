@@ -1,0 +1,33 @@
+services:
+  django:
+    command: /home/django/entrypoint.prod.sh gunicorn core.wsgi
+    environment:
+      - DJANGO_DEBUG=False
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY:?DJANGO_SECRET_KEY}
+    volumes:
+      - static:/home/django/static/
+      - media:/home/django/media/
+  celery:
+    volumes:
+      - static:/home/django/static/
+      - media:/home/django/media/
+  celery-beat:
+    volumes:
+      - static:/home/django/static/
+      - media:/home/django/media/
+  nginx:
+    image: nginx:alpine-slim
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - static:/usr/share/nginx/static/
+      - media:/usr/share/nginx/media/
+    ports:
+      - "${DJANGO_WEB_PORT:-8000}:8000"
+    depends_on:
+      django:
+        condition: service_healthy
+
+
+volumes:
+  static:
+  media:

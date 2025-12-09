@@ -1,0 +1,36 @@
+# Python
+python-dotenv
+setuptools>=65.5.1
+certifi>=2022.12.07
+
+# Django
+Django~=4.1
+djangorestframework
+django-filter
+django-cors-headers
+django-cleanup
+# django-auditlog
+# temporary fix for django-auditlog. will change to original source when Jazzband merges my PR
+git+https://github.com/HarleyK1ng/django-auditlog.git@master#egg=django-auditlog
+
+# Miscroservices
+dj-ms-auth-router==1.4.0
+
+# Databases
+psycopg2-binary
+dj-database-url
+
+# Deployment
+gunicorn
+whitenoise
+
+# Async Celery tasks
+celery
+django-celery-beat
+django-celery-results
+
+# Message broker
+pika
+
+# Sentry
+sentry-sdk

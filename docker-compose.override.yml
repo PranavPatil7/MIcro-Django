@@ -1,0 +1,12 @@
+services:
+  django:
+    ports:
+      - "${DJANGO_WEB_PORT:-8000}:8000"
+    volumes:
+      - .:/home/django/
+  celery:
+    volumes:
+      - .:/home/django/
+  celery-beat:
+    volumes:
+      - .:/home/django/
